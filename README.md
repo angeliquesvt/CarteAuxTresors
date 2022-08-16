@@ -18,6 +18,22 @@ java -jar LaCarteAuxTresors-1.0-SNAPSHOT.jar [fichierAlire]
 ```
 Le résultat sera affiché dans le dossier target du projet dans GameResult.txt 
 
+## Tests
+Les tests d'intégrations se situent dans le dossier src/integration-tests
+Les tests unitaires se situent dans le dossier src/test
+
+## Architecture
+Dans src/java :
+* Models représentent les objets du jeu
+
+* Service représentent les classes permettant d'effectuer des actions : 
+
+`* CarteAuxTresorsFileService: Lecture et écriture de fichier `
+
+`* CarteAuxTresorsPlayService Démarrer le jeu`
+
+### 
+
 ## Langage:
 Java 11  
 Junit 5
