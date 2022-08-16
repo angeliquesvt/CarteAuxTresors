@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Aventurier extends CarteItem {
-    private String name;
-    private OrientationEnum orientation;
+    private String name = "";
+    private OrientationEnum orientation = OrientationEnum.S;
     private List<DirectionEnum> paths = new ArrayList<>();
     private List<Tresor> tresorsWin = new ArrayList<>();
 

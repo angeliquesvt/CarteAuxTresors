@@ -16,7 +16,6 @@ public class CarteAuxTresorFileService {
     private static Aventurier aventurier;
     private static Carte carte;
 
-    // TODO : A modifier car utiliser seulement pour les tests d'inte... (car snn conserve les data de carte)
     public static void setCarte(Carte carte) {
         CarteAuxTresorFileService.carte = carte;
     }
@@ -73,14 +72,13 @@ public class CarteAuxTresorFileService {
         }
     }
 
-    public static void writeFile(Carte carte) {
+    public static void writeFile(Carte carte, String directory) {
         String fileName= "GameResult.txt";
-        try(FileWriter fileWriter = new FileWriter(fileName)) {
+        try(FileWriter fileWriter = new FileWriter(new File(directory,"GameResult.txt"))) {
             fileWriter.write(carte.toString());
             System.out.println(String.format("Vous pourrez consulter les résultats de la partie dans %s", fileName));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }

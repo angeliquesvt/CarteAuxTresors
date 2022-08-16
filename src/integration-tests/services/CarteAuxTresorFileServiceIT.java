@@ -2,10 +2,10 @@ package services;
 
 import enumerations.DirectionEnum;
 import enumerations.OrientationEnum;
+import exceptions.AventurierOutOfBoundsException;
 import exceptions.EnumUnknownException;
 import exceptions.MapGenerationException;
-import models.Carte;
-import models.Position;
+import models.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -81,6 +82,35 @@ public class CarteAuxTresorFileServiceIT {
         assertThrows(MapGenerationException.class, () -> {
             CarteAuxTresorFileService.readFile(testFile2.toPath().toString());
         });
+    }
 
+    @Test
+    void should_writeFile() throws IOException, AventurierOutOfBoundsException {
+        // GIVEN
+        Carte carte = new Carte(3, 3);
+        List<DirectionEnum> path = new ArrayList<>();
+        List<Montagne> montagnes = new ArrayList<>();
+        List<Tresor> tresors = new ArrayList<>();
+        Aventurier aventurier = new Aventurier(new Position(1,1), "BearGrylls", OrientationEnum.S, path);
+        Montagne montagne = new Montagne(new Position(1, 2));
+        Tresor tresor = new Tresor(new Position(1, 2), 2);
+        path.add(DirectionEnum.A);
+        montagnes.add(montagne);
+        tresors.add(tresor);
+        carte.setAventurier(aventurier);
+        carte.setMontagnes(montagnes);
+        carte.setTresors(tresors);
+        String expectedOutPutData =
+                "C - 3 - 3\n" +
+                "M - 1 - 2\n" +
+                "T - 1 - 2 - 2\n" +
+                "A - BearGrylls - 1 - 1 - S - 0";
+
+        // WHEN
+        CarteAuxTresorFileService.writeFile(carte, anotherTempDir.toPath().toString());
+
+        // THEN
+        String content = Files.readString(anotherTempDir.toPath().resolve("GameResult.txt"));
+        assertEquals(content, expectedOutPutData);
     }
 }
