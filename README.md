@@ -14,7 +14,7 @@ mvn clean install
 ```
 Pour exécuter le projet, aller dans le dossier target et lancer la commande suivante ***en passant le chemin du fichier à lire en paramètre***:
 ```
-java -jar LaCarteAuxTresors-1.0-SNAPSHOT.jar [fichierAlire]
+java -jar LaCarteAuxTresors-1.0-SNAPSHOT.jar [fichierAlire] [cheminDuFichierResultat]
 ```
 Le résultat sera affiché dans le dossier target du projet dans GameResult.txt 
 
